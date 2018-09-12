@@ -1,7 +1,7 @@
-# vue-blog
+# Express_Blog_Demo
 
 > A Vue.js project
-使用Vue重构了之前的博客，前端采用Vue，通过axios向后端发送请求，后端还是使用Express做接口，尝试前后端分离。
+通过 Express 提供 API，前端使用 Vue 重构了之前的 Ejs 模板。
 
 ## Build Setup
 
