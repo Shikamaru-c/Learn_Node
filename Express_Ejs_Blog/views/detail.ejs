@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= blog.title %></title>
+  <link rel="stylesheet" href="/stylesheets/reset.css">
+  <link rel="stylesheet" href="/stylesheets/index.css">
+  <link rel="stylesheet" href="/stylesheets/detail.css">
+  <link rel="stylesheet" href="/stylesheets/iconfont.css">
+</head>
+<body>
+  <div class="header">
+    <a href="/">
+      <div class="logo">
+        <div class="square"></div>
+      </div>
+    </a>
+    <div class="user">
+      <% if (!user) { %>
+        <button class="btn-login">登录</button>
+        <button class="btn-signin">注册</button>
+      <% } else { %>
+        <span class="user-id"><%= user.id %></span>
+        <% if (user.level === 7) { %>
+          <button class="btn-admin"><a href="/admin">管理</a></button>
+        <% } %>
+        <button class="btn-logout"><a href="/logout">登出</a></button>
+      <% } %>
+    </div>
+    <div class="popup-layer">
+      <div class="mask"></div>
+      <div class="login">
+        <h1>登录</h1>
+        <form method="post" action="/login">
+          <table class="login-info">
+            <tr>
+              <td><label for="id">帐号</label></td>
+              <td><input type="text" name="id"  placeholder="请输入您的账号"></td>
+            </tr>
+            <tr>
+              <td><label for="password">密码</label></td>
+              <td><input type="password" name="password"  placeholder="请输入您的账号"></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><button type="submit">登录</button></td>
+            </tr>
+          </table>
+        </form>
+        <div class="check-signin">还没有帐号? 点击注册</div>
+      </div>
+      <div class="signin">
+        <h1>注册</h1>
+        <div class="signin-error"></div>
+        <form method="post" action="/signin">
+          <table class="signin-info">
+            <tr>
+              <td></td>
+              <td class="hint">支持字母、数字、"-"、"_"组合,6-12个字符</td>
+            </tr>
+            <tr>
+              <td><label for="id">帐号</label></td>
+              <td><input type="text" name="id" id="id"></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="hint">至少2种字符组合,6-12个字符</td>
+            </tr>
+            <tr>
+              <td><label for="password">密码</label></td>
+              <td><input type="password" name="password" id="password"></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td class="hint">请再次输入密码</td>
+            </tr>
+            <tr>
+              <td><label for="repassword">重复密码</label></td>
+              <td><input type="password" name="repassword" id="repassword"></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><button type="submit" class="btn-signin-commit">提交</button></td>
+            </tr>
+          </table>
+        </form>
+        <div class="check-login">已有帐号? 赶紧登录吧!</div>
+      </div>
+    </div>
+    <% if (message) { %>
+      <div class="error-message">
+        <p>
+          <%= message.data %>
+        </p>
+      </div>
+    <% } %>
+  </div>
+  <div class="main">
+    <div class="content-wrapper">
+      <div class="detail-wrapper">
+        <div class="detail">
+          <div class="title"><%= article.title %></div>
+          <div class="author">CENCHAOCHAO</div>
+          <div class="tags">
+            <ul>
+              <% article.tags.forEach(function (tag) { %>
+              <li><a href="/posts/<%= tag %>"><%= tag %></a></li>
+              <% }) %>
+            </ul>
+          </div>
+          <div class="article-content">
+            <%- article.content %>          
+          </div>
+          <div class="footer">
+            <div class="footer-left">
+              <span class="time">发表时间：<%= article.date %></span>
+            </div>
+            <div class="footer-right">
+              <span class="hits">浏览数：<%= article.hits %></span>
+              <span class="comments-count">评论数：</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="line"></div>
+      <div class="comments">
+        <% if (user) { %>
+        <button class="btn-comment">点击评论</button>
+        <% } else { %>
+        <button class="btn-comment-login">登录后评论</button>
+        <% } %>
+        <div class="comment-layer">
+          <form method="post" action="/comments/main/<%= article._id %>"> 
+            <textarea name="content"></textarea>
+            <button type="submit" name="commit">提交</button>
+            <button type="button" class="cancel">取消</button>
+          </form>
+        </div>
+        <div class="line"></div>
+        <ul>
+          <% comments.forEach(function (comment) { %>
+          <li class="main-comment">
+            <div class="comment">
+              <div class="user-info">
+                <div class="user-avatar">
+                  <img width="70" height="70" src="/images/default.png">
+                </div>
+                <div class="name-time">
+                  <h2 class="user-name"><%= comment.userId %></h2>
+                  <h3 class="comment-time"><%= comment.date %></h3>
+                </div>
+              </div>
+              <div class="comment-content">
+                <p><%= comment.content %></p>
+                <% if (user) { %>
+                <a class="btn-reply"
+                   data-comment-id="<%= comment._id %>">
+                  回复
+                </a>
+                <% } else { %>
+                <a class="btn-comment-login">登录后评论</a>
+                <% } %>
+              </div>
+            </div>
+            <% if (comment.subComments.length > 1) { %>            
+            <ul class="sub-comment">
+              <% comment.subComments.slice(1).forEach(function (subComment) { %>
+              <li>
+                <div class="comment">
+                  <div class="user-info">
+                    <div class="user-avatar">
+                      <img width="70" height="70" src="/images/default.png">
+                    </div>
+                    <div class="name-time">
+                      <h2 class="user-name"><%= subComment.userId %></h2>
+                      <h3 class="comment-time"><%= subComment.date %></h3>
+                    </div>
+                  </div>
+                  <div class="comment-content">
+                    <p><%= subComment.content %></p>
+                    <% if (user) { %>
+                    <a class="btn-reply"
+                      data-comment-id="<%= comment._id %>"
+                      data-to="<%= subComment.userId %>">
+                      回复
+                    </a>
+                    <% } else { %>
+                    <a class="btn-comment-login">登录后评论</a>
+                    <% } %>
+                  </div>
+                </div>
+              </li>
+              <% }) %>
+            </ul>
+            <% } %>      
+            <div class="line"></div>
+          </li>
+          <% }) %>
+        </ul>
+      </div>
+    </div>
+    <div class="side-bar">
+      <div class="about" id="about-me">
+        <div class="info">
+          <img class="avatar" src="/images/avatar.png" alt="avatar">
+          <div class="name">
+            <span class="spell">CENCHAOCHAO</span>
+            <span class="chinese">岑超超</span>
+          </div>
+        </div>
+        <ul class="contact">
+          <li><a href="https://github.com/cenchaochao"><i class="iconfont icon-github"></i>github.com/cenchaochao</a></li>
+          <li><a><i class="iconfont icon-microsoftoutlook"></i>cenchaochao@outlook.com</a></li>
+          <li><a><i class="iconfont icon-logo-qq"></i>824379487</a></li>
+        </ul>
+      </div>
+      <div class="tag-cloud">
+        <h3>标签云</h3>
+        <ul>
+          <% tags.forEach(function (tag) { %>
+            <li><a href="/posts/<%= tag.tag %>"><%= tag.tag %><span class="count"><%= tag.count %></span></a></li>
+          <% }) %>
+        </ul>
+      </div>
+      <div class="recent-posts">
+        <h3>近期文章</h3>        
+        <ul>
+          <% recentPosts.forEach(function (post) { %>
+          <li><a href="/post/<%= post._id %>"><%= post.title %></a></li>
+          <% }) %>
+        </ul>
+      </div>
+      <div class="copyright">
+        <p>Copyright &copy; 2018</p>
+        <p><a href="/">CENCHAOCHAO.COM</a></p>
+        <p>by Cen Chaochao.</p>
+      </div>
+    </div>
+  </div>
+<script src="/javascripts/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= blog.title %></title>
+  <link rel="stylesheet" href="/stylesheets/reset.css">
+  <link rel="stylesheet" href="/stylesheets/user.css">
+</head>
+<body>
+  <div class="work-space">
+    <div class="work-bar">
+      <ul>
+        <li><a href="/">回到首页</a></li>
+        <li><a href="/admin">管理文章</a></li>
+        <li><a href="/admin/user">管理用户</a></li>
+        <li><a href="/admin/write">发表文章</a></li>
+        <li><a>历史记录</a></li>
+      </ul>
+    </div>
+    <div class="work-content">
+      <h1>用户管理</h1>
+      <table class="work-table">
+        <thead>
+          <tr>
+            <td>用户ID</td>
+            <td>注册日期</td>
+            <td>权限</td>
+            <td>调整权限</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.forEach(function (user) { %>
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= user.date %></td>
+            <td><%= user.level %></td>
+            <td>
+              <form action="/admin/user/level" method="post">
+                <input type="hidden" name="id" value="<%= user.id %>">
+                <select name="level">
+                  <option value="0">0</option>
+                  <option value="7">7</option>
+                </select>
+                <button type="submit" class="btn-commit">确认</button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

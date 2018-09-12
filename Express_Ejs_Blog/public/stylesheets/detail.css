@@ -1,0 +1,224 @@
+.content-wrapper {
+  width: 690px;
+}
+.detail-wrapper {
+  box-sizing: border-box;
+  padding: 30px;
+  background: #fff;  
+  box-shadow: 0 0 3px #ccc;  
+}
+.detail {
+  position: relative;
+  padding-bottom: 150px;
+}
+.title {
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: 500;
+}
+.author {
+  font-size: 16px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+.tags li {
+  display: inline-block;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, .1);
+  box-shadow: 0 0 3px #555;
+}
+.tags li a {
+  display: block;
+  padding: 7px 10px;
+}
+.article-content {
+  margin-top: 30px;
+  line-height: 24px;
+  font-size: 18px;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.footer {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  bottom: 0;
+  font-size: 14px;
+}
+.comments-count {
+  margin-left: 5px;
+}
+
+/* ---------- line ---------- */
+
+.line {
+  margin: 10px 0;
+  height: 20px;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 0 3px #ccc;
+}
+/* ---------- comments ---------- */
+
+.comments {
+  box-sizing: border-box;
+  padding: 15px;
+  background: #fff;
+  box-shadow: 0 0 3px #ccc;
+}
+
+/* ---------- 评论组件 ---------- */
+.btn-comment, button.btn-comment-login {
+  padding: 5px 10px;
+  letter-spacing: 5px;
+  text-indent: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  box-shadow: 0 0 5px #ccc;
+  background: #ccf;
+  cursor: pointer;
+}
+.comment-layer {
+  display: none;
+  justify-content: center;
+  position: fixed;
+  z-index: 1;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+.comment-layer form {
+  font-size: 0;
+}
+.comment-layer textarea {
+  display: block;
+  box-sizing: border-box;
+  min-height: 220px;
+  width: 400px;
+  padding: 15px;
+  line-height: 20px;
+  font-size: 16px;
+  resize: none;
+  border-radius: 15px;
+  border: 1px solid #9cf;
+  box-shadow: 0 0 10px #777;
+}
+.comment-layer button {
+  width: 100px;
+  margin-top: -1px;
+  padding: 15px;
+  line-height: 20px;
+  font-size: 16px;
+  border: 1px solid #9cf;
+  border-top: none;
+  background: #fff;
+  border-bottom-right-radius: 15px;
+  box-shadow: 3px 3px 3px #ccc;
+  cursor: pointer;
+}
+.comment-layer button[name="commit"] {
+  border-right: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 15px;
+  box-shadow: 3px 3px 3px #ccc, -3px 3px 3px #ccc;  
+}
+
+
+/* ---------- 评论内容 ---------- */
+
+.main-comment {
+  width: 100%;
+}
+.main-comment .line {
+  height: 5px;
+}
+.sub-comment {
+  box-sizing: border-box;
+  width: 100%;
+  padding-left: 50px;
+  margin-top: 10px;
+}
+.sub-comment li {
+  margin-top: 10px;
+}
+
+.user-info {
+  display: flex;
+  justify-content: left;
+}
+.user-avatar img {
+  width: 70px;
+  height: 70px;
+}
+.name-time {
+  width: 300px;
+  border-top-right-radius: 70px;
+  padding-left: 10px;
+  background-color: rgba(7, 17, 27, .1);
+}
+.user-name {
+  line-height: 45px;
+  font-size: 24px;
+  font-weight: 500;
+}
+.comment-time {
+  line-height: 25px;
+  font-size: 14px;
+}
+.comment-content {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid rgba(7, 17, 27, .1);
+  line-height: 20px;
+}
+.btn-reply, a.btn-comment-login {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+  color: #555;
+}
+.btn-reply:hover {
+  color: #777;
+}
+
+/* ---------- 弹出的回复评论组件 ---------- */
+.reply-box {
+  box-sizing: border-box;
+  width: 100%;
+  padding-left: 50px;
+  text-align: right;
+  font-size: 0;
+}
+.reply-box textarea {
+  box-sizing: border-box;
+  width: 100%;
+  height: 150px;
+  padding: 20px;
+  border: 1px solid rgba(7, 17, 27, .1);
+  border-top: none;
+  line-height: 20px;
+  font-size: 16px;
+  resize: none;
+}
+.reply-box button {
+  padding: 3px 5px;
+  border: none;
+  cursor: pointer;
+}
+.reply-box button:hover {
+  opacity: 0.4;
+}
+.reply-box .reply-commit {
+  background: pink;  
+}
+.reply-box .reply-cancel {
+  background: rgba(153, 204, 255, .5);  
+}

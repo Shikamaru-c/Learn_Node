@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= blog.title %></title>
+  <link rel="stylesheet" href="/stylesheets/reset.css">
+  <link rel="stylesheet" href="/stylesheets/admin.css">
+</head>
+<body>
+  <div class="work-space">
+    <div class="work-bar">
+      <ul>
+        <li><a href="/">回到首页</a></li>
+        <li><a href="/admin">管理文章</a></li>
+        <li><a href="/admin/user">管理用户</a></li>
+        <li><a href="/admin/write">发表文章</a></li>
+        <li><a>历史记录</a></li>
+      </ul>
+    </div>
+    <div class="work-content">
+      <h1>文章管理</h1>
+      <table class="work-table">
+        <thead>
+          <tr>
+            <td>文章标题</td>
+            <td>文章标签</td>
+            <td>发表日期</td>
+            <td>点击数</td>
+            <td>操作</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% articles.forEach(function (article) { %>
+            <tr>
+              <td><a href="/post/<%= article._id %>" class="article-title"><%= article.title %></a></td>
+              <td>
+                <ul class="tags-list">
+                  <% article.tags.forEach(function (tag) { %>
+                  <li><a href="/posts/<%= tag %>"><%= tag %></a></li>
+                  <% }) %>
+                </ul>
+              </td>
+              <td><%= article.date %></td>
+              <td><%= article.hits %></td>
+              <td>
+                <span class="update">
+                  <a href="/admin/update/<%= article._id %>">修改</a>
+                </span>
+                <span class="delete">
+                  <a href="/admin/remove/<%= article._id %>">删除</a>
+                </span>
+              </td>
+            <tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

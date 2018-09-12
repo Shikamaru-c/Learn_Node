@@ -1,0 +1,27 @@
+{
+  "name": "c_blog",
+  "version": "1.0.0",
+  "description": "my blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "supervisor index.js",
+    "pm2": "pm2 start app.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "config-lite": "^2.1.0",
+    "connect-mongo": "^2.0.1",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "express-formidable": "^1.0.0",
+    "express-session": "^1.15.6",
+    "marked": "^0.3.12",
+    "mongoose": "^5.0.1",
+    "sha1": "^1.1.1"
+  },
+  "devDependencies": {
+    "supervisor": "^0.12.0"
+  }
+}
