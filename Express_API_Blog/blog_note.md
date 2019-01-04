@@ -99,7 +99,7 @@
 ```
   sudo service mongod start
   mongo --port 27777
-  db.createUser({user: 'cenchaochao', pwd: 'chaochao1',
+  db.createUser({user: 'cenchaochao', pwd: '',
     roles: [{role: 'userAdminAnyDatabase', db: 'admin'}]})
 ```
 
